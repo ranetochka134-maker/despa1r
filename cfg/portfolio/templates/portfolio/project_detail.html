@@ -7,7 +7,7 @@
 
 {% block og_title %}{{ project.title }} — despa1r{% endblock %}
 {% block og_description %}{{ project.description|default:"Architecture & Spatial Design by despa1r" }}{% endblock %}
-{% block og_image %}{{ request.scheme }}://{{ request.get_host }}{{ project.cover.url }}{% endblock %}
+{% block og_image %}{% if project.cover %}{{ request.scheme }}://{{ request.get_host }}{{ project.cover.url }}{% endif %}{% endblock %}
 
 {% block content %}
 <article class="project-page">
@@ -15,13 +15,13 @@
     <!-- Заголовок и метаданные проекта -->
     <header class="project-header">
         <div class="project-header-left">
-            <span class="project-tag">{{ project.category }} — {{ project.year }}</span>
+            <span class="project-tag">{{ project.get_category_display|default:project.category }} — {{ project.year }}</span>
             <h1 class="project-title">{{ project.title }}</h1>
         </div>
 
         <div class="project-header-right">
             {% if project.description %}
-                <p class="project-description">{{ project.description }}</p>
+                <p class="project-description">{{ project.description|linebreaksbr }}</p>
             {% endif %}
             <button type="button" class="share-btn" id="copyLinkBtn">
                 {% translate "Copy Link" %} <span>↗</span>
@@ -30,48 +30,59 @@
     </header>
 
     <!-- Главная обложка -->
+    {% if project.cover %}
     <div class="project-cover">
         <img src="{{ project.cover.url }}" alt="{{ project.title }}" class="lightbox-trigger">
     </div>
+    {% endif %}
 
     <!-- Контентные блоки проекта -->
     <div class="project-blocks">
         {% for block in project.content_blocks.all %}
-    <div class="content-block">
-        {% if block.image %}
-            <div class="content-media">
-                <img src="{{ block.image.url }}" alt="{{ project.title }}" class="lightbox-trigger">
-            </div>
-        {% endif %}
-
-        {% if block.video %}
-            <div class="content-media">
-                <video controls playsinline class="content-video">
-                    <source src="{{ block.video.url }}" type="video/mp4">
-                </video>
-            </div>
-        {% endif %}
-
-        {% if block.title or block.description %}
-            <div class="content-text">
-                {% if block.title %}
-                    <h2 class="content-title">{{ block.title }}</h2>
+            <div class="content-block">
+                {% if block.image %}
+                    <div class="content-media">
+                        <img src="{{ block.image.url }}" alt="{{ block.title|default:project.title }}" class="lightbox-trigger">
+                    </div>
                 {% endif %}
-                {% if block.description %}
-                    <p class="content-description">{{ block.description }}</p>
+
+                {% if block.video %}
+                    <div class="content-media">
+                        <video controls playsinline preload="metadata" class="content-video">
+                            <source src="{{ block.video.url }}">
+                            {% translate "Your browser does not support the video tag." %}
+                        </video>
+                    </div>
+                {% endif %}
+
+                {% if block.title or block.description %}
+                    <div class="content-text">
+                        {% if block.title %}
+                            <h2 class="content-title">{{ block.title }}</h2>
+                        {% endif %}
+                        {% if block.description %}
+                            <p class="content-description">{{ block.description|linebreaksbr }}</p>
+                        {% endif %}
+                    </div>
+                {% endif %}
+
+                {% if block.file %}
+                    <div class="content-file">
+                        <a href="{{ block.file.url }}" target="_blank" rel="noopener noreferrer" class="content-link">
+                            {% translate "Open File" %} ↗
+                        </a>
+                    </div>
+                {% endif %}
+
+                {% if block.url %}
+                    <div class="content-file">
+                        <a href="{{ block.url }}" target="_blank" rel="noopener noreferrer" class="content-link">
+                            {{ block.title|default:block.url }} ↗
+                        </a>
+                    </div>
                 {% endif %}
             </div>
-        {% endif %}
-
-        {% if block.file %}
-            <div class="content-file">
-                <a href="{{ block.file.url }}" target="_blank" rel="noopener noreferrer" class="content-link">
-                    {% translate "Open File" %} ↗
-                </a>
-            </div>
-        {% endif %}
-    </div>
-{% endfor %}
+        {% endfor %}
     </div>
 
     <!-- Навигация между проектами -->
