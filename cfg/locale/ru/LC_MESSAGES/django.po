@@ -1,0 +1,160 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-18 12:18+0500\n"
+"PO-Revision-Date: 2026-08-18 12:45+0500\n"
+"Last-Translator: \n"
+"Language-Team: Russian\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+msgid "Russian"
+msgstr "Русский"
+
+msgid "English"
+msgstr "Английский"
+
+msgid "Works"
+msgstr "Работы"
+
+msgid "About"
+msgstr "Обо мне"
+
+msgid "Contact"
+msgstr "Контакты"
+
+msgid "Architecture & Spatial Design"
+msgstr "Архитектура и пространственный дизайн"
+
+msgid "Architecture / Spatial Design / Visual Arts"
+msgstr "Архитектура / Пространственный дизайн / Визуальное искусство"
+
+msgid "Architecture & Design"
+msgstr "Архитектура и дизайн"
+
+msgid "Architecture / Interior / Design"
+msgstr "Архитектура / Интерьер / Дизайн"
+
+msgid "Studio"
+msgstr "Студия"
+
+msgid "Independent architect and spatial designer exploring minimal forms, raw materials, and light."
+msgstr "Независимый архитектор и дизайнер, исследующий минималистичные формы, природные текстуры и свет."
+
+msgid "Selected Works"
+msgstr "Избранные работы"
+
+msgid "Projects"
+msgstr "Проектов"
+
+msgid "No projects yet."
+msgstr "Проектов пока нет."
+
+msgid "About Atelier"
+msgstr "О студии"
+
+msgid "I am an independent architect and spatial designer. My practice focuses on minimal architecture, monochrome aesthetics, and experimental 3D visualization."
+msgstr "Я — независимый архитектор и дизайнер пространств. Моя практика сфокусирована на минималистичной архитектуре, монохромной эстетике и экспериментальной 3D-визуализации."
+
+msgid "Approach"
+msgstr "Подход к работе"
+
+msgid "I work closely on every stage of the project — from early concept sketches and 3D modeling to detailed architectural plans and interior supervision."
+msgstr "Я лично веду каждый этап проекта — от концептуальных эскизов и 3D-моделирования до детальных чертежей и авторского надзора."
+
+msgid "Capabilities"
+msgstr "Направления"
+
+msgid "Architectural Concept & Drafting"
+msgstr "Архитектурная концепция и чертежи"
+
+msgid "Interior Design & Bespoke Detailing"
+msgstr "Дизайн интерьеров и авторские детали"
+
+msgid "CGI, 3D Rendering & Animation"
+msgstr "CGI, 3D-рендеринг и анимация"
+
+msgid "Creative Direction"
+msgstr "Креативное руководство"
+
+msgid "Direct Contact"
+msgstr "Контакты"
+
+msgid "Get in Touch"
+msgstr "Связаться со мной"
+
+msgid "Let's discuss your next project."
+msgstr "Давайте обсудим ваш проект или коллаборацию."
+
+msgid "Name"
+msgstr "Имя"
+
+msgid "Your name"
+msgstr "Ваше имя"
+
+msgid "Email"
+msgstr "Электронная почта"
+
+msgid "Message"
+msgstr "Сообщение"
+
+msgid "Tell us about your project..."
+msgstr "Расскажите о вашем проекте..."
+
+msgid "Send Message"
+msgstr "Отправить сообщение"
+
+msgid "Phone"
+msgstr "Телефон"
+
+msgid "Location"
+msgstr "Локация"
+
+msgid "Astana, Kazakhstan"
+msgstr "Астана, Казахстан"
+
+msgid "Available Worldwide (Remote & On-site)"
+msgstr "Доступен по всему миру (удаленно и на объекте)"
+
+msgid "Your message has been sent successfully!"
+msgstr "Ваше сообщение успешно отправлено!"
+
+msgid "An error occurred. Please try again later."
+msgstr "Произошла ошибка. Пожалуйста, попробуйте позже."
+
+msgid "Open PDF"
+msgstr "Открыть PDF"
+
+msgid "Open project"
+msgstr "Открыть проект"
+
+msgid "Your browser does not support video."
+msgstr "Ваш браузер не поддерживает воспроизведение видео."
+
+msgid "All"
+msgstr "Все"
+
+msgid "Architecture"
+msgstr "Архитектура"
+
+msgid "Interior"
+msgstr "Интерьеры"
+
+msgid "Concept"
+msgstr "Концепты"
+
+msgid "Copy Link"
+msgstr "Скопировать ссылку"
+
+msgid "Link Copied!"
+msgstr "Ссылка скопирована!"
+
+msgid "Previous Project"
+msgstr "Предыдущий проект"
+
+msgid "Next Project"
+msgstr "Следующий проект"

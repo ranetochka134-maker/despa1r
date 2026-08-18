@@ -1,0 +1,41 @@
+{% extends "portfolio/base.html" %}
+{% load i18n %}
+
+{% block title %}
+{% translate "About" %} — despa1r
+{% endblock %}
+
+{% block content %}
+<section class="about-page" style="max-width: 900px; margin: 40px auto; padding: 0 20px;">
+    <h1 style="font-size: 36px; text-transform: uppercase; margin-bottom: 20px; letter-spacing: 1px;">
+        despa1r
+    </h1>
+    
+    <p style="font-size: 18px; line-height: 1.6; color: #333; margin-bottom: 40px;">
+        {% translate "I am an independent architect and spatial designer. My practice focuses on minimal architecture, monochrome aesthetics, and experimental 3D visualization." %}
+    </p>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; border-top: 1px solid #eee; padding-top: 30px;">
+        <div>
+            <h2 style="font-size: 14px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px;">
+                {% translate "Approach" %}
+            </h2>
+            <p style="font-size: 14px; line-height: 1.6; color: #666;">
+                {% translate "I work closely on every stage of the project — from early concept sketches and 3D modeling to detailed architectural plans and interior supervision." %}
+            </p>
+        </div>
+
+        <div>
+            <h2 style="font-size: 14px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px;">
+                {% translate "Capabilities" %}
+            </h2>
+            <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px; color: #666; line-height: 2;">
+                <li>— {% translate "Architectural Concept & Drafting" %}</li>
+                <li>— {% translate "Interior Design & Bespoke Detailing" %}</li>
+                <li>— {% translate "CGI, 3D Rendering & Animation" %}</li>
+                <li>— {% translate "Creative Direction" %}</li>
+            </ul>
+        </div>
+    </div>
+</section>
+{% endblock %}

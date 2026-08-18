@@ -1,0 +1,98 @@
+{% load static %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}
+        despa1r — Architecture & Spatial Design
+        {% endblock %}
+    </title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="{% static 'portfolio/images/favicon.svg' %}">
+
+    <!-- Open Graph / Meta for Telegram, WhatsApp, Socials -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="despa1r">
+    <meta property="og:title" content="{% block og_title %}despa1r — Architecture & Spatial Design{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Independent architect and spatial designer exploring minimal forms, raw materials, and light.{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{{ request.scheme }}://{{ request.get_host }}{% static 'portfolio/images/favicon.svg' %}{% endblock %}">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="despa1r — Architecture & Spatial Design">
+    <meta name="twitter:description" content="Independent architect and spatial designer exploring minimal forms, raw materials, and light.">
+
+    <link rel="stylesheet" href="{% static 'portfolio/css/style.css' %}?v=3">
+</head>
+
+<body>
+
+<header class="site-header">
+    <a href="{% url 'home' %}" class="logo">
+        DESPA1R
+    </a>
+
+    <div class="header-right">
+        <nav class="navigation">
+            <a href="{% url 'project_list' %}">
+                {% translate "Works" %}
+            </a>
+            <a href="{% url 'about' %}">
+                {% translate "About" %}
+            </a>
+            <a href="{% url 'contact' %}">
+                {% translate "Contact" %}
+            </a>
+        </nav>
+
+        <div class="lang-switch">
+            <form action="{% url 'set_language' %}" method="post">
+                {% csrf_token %}
+                <input name="next" type="hidden" value="{{ request.get_full_path }}">
+                
+                {% get_current_language as CURRENT_LANGUAGE %}
+                {% get_available_languages as AVAILABLE_LANGUAGES %}
+                
+                {% for lang_code, lang_name in AVAILABLE_LANGUAGES %}
+                    <button type="submit" 
+                            name="language" 
+                            value="{{ lang_code }}" 
+                            class="{% if lang_code == CURRENT_LANGUAGE %}active{% endif %}">
+                        {{ lang_code|upper }}
+                    </button>
+                    {% if not forloop.last %} <span class="lang-divider">/</span> {% endif %}
+                {% endfor %}
+            </form>
+        </div>
+    </div>
+</header>
+
+<main class="site-main">
+    {% block content %}
+    {% endblock %}
+</main>
+
+<footer class="site-footer">
+    <span>
+        DESPA1R
+    </span>
+
+    <span>
+        {% translate "Architecture & Spatial Design" %}
+    </span>
+
+    <span>
+        2026
+    </span>
+</footer>
+
+</body>
+</html>

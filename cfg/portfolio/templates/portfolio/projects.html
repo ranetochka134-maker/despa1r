@@ -1,0 +1,89 @@
+{% extends "portfolio/base.html" %}
+{% load i18n %}
+
+{% block title %}
+{% translate "Works" %} — despa1r
+{% endblock %}
+
+{% block content %}
+<section class="works-page">
+    <div class="works-header">
+        <h1 class="page-title">{% translate "Works" %}</h1>
+
+        <!-- Фильтры по категориям -->
+        <div class="filter-bar">
+            <button type="button" class="filter-btn active" data-filter="all">
+                {% translate "All" %}
+            </button>
+            <button type="button" class="filter-btn" data-filter="Архитектура">
+                {% translate "Architecture" %}
+            </button>
+            <button type="button" class="filter-btn" data-filter="Интерьер">
+                {% translate "Interior" %}
+            </button>
+            <button type="button" class="filter-btn" data-filter="Концепт">
+                {% translate "Concept" %}
+            </button>
+        </div>
+    </div>
+
+    <div class="project-grid" id="project-grid">
+        {% for project in projects %}
+            <a href="{% url 'project_detail' project.id %}" 
+               class="project-card filter-item" 
+               data-category="{{ project.category }}">
+                
+                <div class="project-image-wrapper">
+                    <img src="{{ project.cover.url }}" alt="{{ project.title }}" class="project-image">
+                </div>
+
+                <div class="project-info">
+                    <h3 class="project-name">{{ project.title }}</h3>
+                    <div class="project-meta">
+                        {{ project.category }}<br>
+                        {{ project.year }}
+                    </div>
+                </div>
+            </a>
+        {% empty %}
+            <p>{% translate "No projects yet." %}</p>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Скрипт быстрой фильтрации -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const filterButtons = document.querySelectorAll(".filter-btn");
+        const projectCards = document.querySelectorAll(".filter-item");
+
+        filterButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                // Переключение активного состояния кнопок
+                filterButtons.forEach(btn => btn.classList.remove("active"));
+                this.classList.add("active");
+
+                const filterValue = this.getAttribute("data-filter").toLowerCase();
+
+                projectCards.forEach(card => {
+                    const cardCategory = (card.getAttribute("data-category") || "").toLowerCase();
+
+                    if (filterValue === "all" || cardCategory.includes(filterValue)) {
+                        card.style.display = "block";
+                        setTimeout(() => {
+                            card.style.opacity = "1";
+                            card.style.transform = "scale(1)";
+                        }, 10);
+                    } else {
+                        card.style.opacity = "0";
+                        card.style.transform = "scale(0.97)";
+                        setTimeout(() => {
+                            card.style.display = "none";
+                        }, 250);
+                    }
+                });
+            });
+        });
+    });
+</script>
+{% endblock %}

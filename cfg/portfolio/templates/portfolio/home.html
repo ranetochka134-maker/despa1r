@@ -1,0 +1,90 @@
+{% extends "portfolio/base.html" %}
+{% load i18n %}
+
+{% block title %}
+despa1r — {% translate "Architecture & Spatial Design" %}
+{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+
+    <span class="hero-label">
+        {% translate "Architecture / Spatial Design / Visual Arts" %}
+    </span>
+
+    <h1 class="hero-title">
+        DESPA1R<br>
+        {% translate "Studio" %}
+    </h1>
+
+    <p class="hero-description">
+        {% translate "Independent architect and spatial designer exploring minimal forms, raw materials, and light." %}
+    </p>
+
+</section>
+
+<section>
+
+    <div class="section-header">
+
+        <h2 class="section-title">
+            {% translate "Selected Works" %}
+        </h2>
+
+        <span class="section-number">
+            {{ projects.count }} {% translate "Projects" %}
+        </span>
+
+    </div>
+
+    <div class="project-grid">
+
+        {% for project in projects %}
+
+            <a
+                href="{% url 'project_detail' project.id %}"
+                class="project-card"
+            >
+
+                <div class="project-image-wrapper">
+
+                    <img
+                        src="{{ project.cover.url }}"
+                        alt="{{ project.title }}"
+                        class="project-image"
+                    >
+
+                </div>
+
+                <div class="project-info">
+
+                    <h3 class="project-name">
+                        {{ project.title }}
+                    </h3>
+
+                    <div class="project-meta">
+
+                        {{ project.category }}<br>
+
+                        {{ project.year }}
+
+                    </div>
+
+                </div>
+
+            </a>
+
+        {% empty %}
+
+            <p>
+                {% translate "No projects yet." %}
+            </p>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}

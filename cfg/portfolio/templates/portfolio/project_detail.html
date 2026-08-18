@@ -1,0 +1,143 @@
+{% extends "portfolio/base.html" %}
+{% load i18n %}
+
+{% block title %}
+{{ project.title }} — despa1r
+{% endblock %}
+
+{% block og_title %}{{ project.title }} — despa1r{% endblock %}
+{% block og_description %}{{ project.description|default:"Architecture & Spatial Design by despa1r" }}{% endblock %}
+{% block og_image %}{{ request.scheme }}://{{ request.get_host }}{{ project.cover.url }}{% endblock %}
+
+{% block content %}
+<article class="project-page">
+
+    <!-- Заголовок и метаданные проекта -->
+    <header class="project-header">
+        <div class="project-header-left">
+            <span class="project-tag">{{ project.category }} — {{ project.year }}</span>
+            <h1 class="project-title">{{ project.title }}</h1>
+        </div>
+
+        <div class="project-header-right">
+            {% if project.description %}
+                <p class="project-description">{{ project.description }}</p>
+            {% endif %}
+            <button type="button" class="share-btn" id="copyLinkBtn">
+                {% translate "Copy Link" %} <span>↗</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Главная обложка -->
+    <div class="project-cover">
+        <img src="{{ project.cover.url }}" alt="{{ project.title }}" class="lightbox-trigger">
+    </div>
+
+    <!-- Контентные блоки проекта -->
+    <div class="project-blocks">
+        {% for block in project.content_blocks.all %}
+    <div class="content-block">
+        {% if block.image %}
+            <div class="content-media">
+                <img src="{{ block.image.url }}" alt="{{ project.title }}" class="lightbox-trigger">
+            </div>
+        {% endif %}
+
+        {% if block.video %}
+            <div class="content-media">
+                <video controls playsinline class="content-video">
+                    <source src="{{ block.video.url }}" type="video/mp4">
+                </video>
+            </div>
+        {% endif %}
+
+        {% if block.title or block.description %}
+            <div class="content-text">
+                {% if block.title %}
+                    <h2 class="content-title">{{ block.title }}</h2>
+                {% endif %}
+                {% if block.description %}
+                    <p class="content-description">{{ block.description }}</p>
+                {% endif %}
+            </div>
+        {% endif %}
+
+        {% if block.file %}
+            <div class="content-file">
+                <a href="{{ block.file.url }}" target="_blank" rel="noopener noreferrer" class="content-link">
+                    {% translate "Open File" %} ↗
+                </a>
+            </div>
+        {% endif %}
+    </div>
+{% endfor %}
+    </div>
+
+    <!-- Навигация между проектами -->
+    <nav class="project-pagination">
+        {% if prev_project %}
+            <a href="{% url 'project_detail' prev_project.id %}" class="pagination-link prev">
+                <span class="nav-label">← {% translate "Previous Project" %}</span>
+                <span class="nav-title">{{ prev_project.title }}</span>
+            </a>
+        {% else %}
+            <div></div>
+        {% endif %}
+
+        {% if next_project %}
+            <a href="{% url 'project_detail' next_project.id %}" class="pagination-link next">
+                <span class="nav-label">{% translate "Next Project" %} →</span>
+                <span class="nav-title">{{ next_project.title }}</span>
+            </a>
+        {% endif %}
+    </nav>
+
+</article>
+
+<!-- Модальное окно Lightbox для просмотра фото на весь экран -->
+<div id="lightbox" class="lightbox-modal">
+    <span class="lightbox-close">&times;</span>
+    <img id="lightboxImg" class="lightbox-content" alt="">
+</div>
+
+<!-- JS-скрипты для Lightbox и копирования ссылки -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Lightbox
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImg = document.getElementById("lightboxImg");
+        const triggers = document.querySelectorAll(".lightbox-trigger");
+        const closeBtn = document.querySelector(".lightbox-close");
+
+        triggers.forEach(img => {
+            img.addEventListener("click", function () {
+                lightbox.style.display = "flex";
+                lightboxImg.src = this.src;
+            });
+        });
+
+        const closeLightbox = () => {
+            lightbox.style.display = "none";
+        };
+
+        if (closeBtn) closeBtn.addEventListener("click", closeLightbox);
+        lightbox.addEventListener("click", function (e) {
+            if (e.target !== lightboxImg) closeLightbox();
+        });
+
+        // Copy link
+        const copyBtn = document.getElementById("copyLinkBtn");
+        if (copyBtn) {
+            copyBtn.addEventListener("click", function () {
+                navigator.clipboard.writeText(window.location.href);
+                const originalText = this.innerHTML;
+                this.innerHTML = "{% translate 'Link Copied!' %}";
+                setTimeout(() => {
+                    this.innerHTML = originalText;
+                }, 2000);
+            });
+        }
+    });
+</script>
+{% endblock %}

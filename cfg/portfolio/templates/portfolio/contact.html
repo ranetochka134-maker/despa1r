@@ -1,0 +1,78 @@
+{% extends "portfolio/base.html" %}
+{% load i18n %}
+
+{% block title %}
+{% translate "Contact" %} — despa1r
+{% endblock %}
+
+{% block content %}
+<section class="contact-page">
+    <h1 class="page-title">{% translate "Get in Touch" %}</h1>
+    <p class="contact-subtitle">{% translate "Let's discuss your next project." %}</p>
+
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="message-alert {{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="contact-layout">
+        <form method="post" class="contact-form">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name">{% translate "Name" %}</label>
+                <input type="text" id="name" name="name" required placeholder="{% translate 'Your name' %}">
+            </div>
+
+            <div class="form-group">
+                <label for="email">{% translate "Email" %}</label>
+                <input type="email" id="email" name="email" required placeholder="{% translate 'your@email.com' %}">
+            </div>
+
+            <div class="form-group">
+                <label for="message">{% translate "Message" %}</label>
+                <textarea id="message" name="message" rows="5" required placeholder="{% translate 'Tell us about your project...' %}"></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">{% translate "Send Message" %} →</button>
+        </form>
+
+        <div class="contact-details">
+            <div class="contact-group">
+                <h3 class="contact-heading">{% translate "Direct Contact" %}</h3>
+                
+                <div class="contact-cards">
+                    <!-- Telegram -->
+                    <a href="https://t.me/bodhndwh" target="_blank" rel="noopener noreferrer" class="contact-link-card">
+                        <span class="link-label">Telegram</span>
+                        <span class="link-value">@bodhndwh</span>
+                        <span class="link-arrow">↗</span>
+                    </a>
+
+                    <!-- Телефон -->
+                    <a href="tel:+77025360884" class="contact-link-card">
+                        <span class="link-label">{% translate "Phone" %}</span>
+                        <span class="link-value">+7 (702) 536-08-84</span>
+                        <span class="link-arrow">↗</span>
+                    </a>
+
+                    <!-- Email -->
+                    <a href="mailto:your_email@example.com" class="contact-link-card">
+                        <span class="link-label">Email</span>
+                        <span class="link-value">your_email@example.com</span>
+                        <span class="link-arrow">↗</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="contact-group studio-info">
+                <h3 class="contact-heading">{% translate "Location" %}</h3>
+                <p class="studio-city">{% translate "Astana, Kazakhstan" %}</p>
+                <p class="studio-sub">{% translate "Available Worldwide (Remote & On-site)" %}</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
