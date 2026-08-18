@@ -17,17 +17,14 @@ class ProjectAdmin(TabbedTranslationAdmin):
         "year",
         "location",
     )
-
     list_filter = (
         "category",
         "year",
     )
-
     search_fields = (
         "title",
         "description",
     )
-
     inlines = [
         ContentBlockInline,
     ]
@@ -41,17 +38,14 @@ class ContentBlockAdmin(TabbedTranslationAdmin):
         "title",
         "order",
     )
-
     list_filter = (
         "content_type",
         "project",
     )
-
     search_fields = (
         "title",
-        "text",
+        "description",  # Исправлено с "text" на "description"
     )
-
     ordering = (
         "project",
         "order",
