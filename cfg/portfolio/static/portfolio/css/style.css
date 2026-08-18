@@ -804,3 +804,25 @@ main, .site-main {
     font-weight: 700;
     text-transform: uppercase;
 }
+
+@media (max-width: 768px) {
+  /* Разносим логотип и навигацию по строкам или уменьшаем отступы */
+  header, nav, .navbar {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 15px;
+  }
+
+  /* Уменьшаем размер шрифта ссылок в шапке */
+  nav a, .nav-link {
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    white-space: nowrap; /* чтобы "ОБО МНЕ" не разбивалось на 2 строки */
+  }
+
+  /* Смещаем переключатель языка */
+  .lang-switch {
+    margin-left: auto;
+    font-size: 11px;
+  }
+}
